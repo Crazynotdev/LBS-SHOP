@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produit · LBS SHOP</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ===== FONTS PREMIUM ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: #ffffff;
+      color: #0f172a;
+      min-height: 100vh;
+    }
+
+    /* ===== BOUTON RETOUR STYLÉ ===== */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 2rem 4rem;
+      padding: 0.8rem 1.8rem;
+      background: #f8fafc;
+      color: #1e293b;
+      text-decoration: none;
+      border-radius: 60px;
+      font-weight: 500;
+      border: 1px solid #e2e8f0;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .back-link:hover {
+      background: #1e293b;
+      color: white;
+      border-color: #1e293b;
+      transform: translateX(-5px);
+    }
+
+    /* ===== PAGE PRODUIT LUXE ===== */
+    .product-page {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 2rem 4rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* ===== GALERIE IMAGE ===== */
+    .image-container {
+      position: relative;
+      border-radius: 40px;
+      overflow: hidden;
+      background: #f8fafc;
+      box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.2);
+      aspect-ratio: 1/1;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .image-container:hover img {
+      transform: scale(1.05);
+    }
+
+    /* BADGE PROMO SUR L'IMAGE */
+    .product-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #dc2626;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      box-shadow: 0 10px 25px -5px #dc2626;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(4px);
+      z-index: 10;
+    }
+
+    /* ===== INFOS PRODUIT ===== */
+    .info {
+      padding: 1rem 0;
+    }
+
+    .info h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      color: #0f172a;
+      letter-spacing: -1px;
+    }
+
+    /* PRIX */
+    .price-container {
+      background: #f8fafc;
+      padding: 2rem;
+      border-radius: 40px;
+      margin-bottom: 2rem;
+    }
+
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .old {
+      color: #94a3b8;
+      text-decoration: line-through 2px #dc2626;
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+
+    .current {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1;
+    }
+
+    .current::after {
+      content: ' FCFA';
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #475569;
+      margin-left: 5px;
+    }
+
+    /* SÉLECTION TAILLE */
+    .size-section {
+      margin-bottom: 2rem;
+    }
+
+    .size-label {
+      display: block;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #475569;
+      margin-bottom: 1rem;
+    }
+
+    #size {
+      width: 100%;
+      padding: 1.2rem 1.5rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1.5rem center;
+    }
+
+    #size:hover {
+      border-color: #94a3b8;
+    }
+
+    #size:focus {
+      outline: none;
+      border-color: #0f172a;
+      box-shadow: 0 0 0 4px #e2e8f0;
+    }
+
+    /* BOUTON AJOUTER SPECTACULAIRE */
+    .add-btn {
+      width: 100%;
+      padding: 1.5rem;
+      background: #0f172a;
+      color: white;
+      border: none;
+      border-radius: 40px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid transparent;
+    }
+
+    .add-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .add-btn:hover {
+      background: #1e293b;
+      transform: translateY(-3px);
+      box-shadow: 0 20px 30px -10px #0f172a;
+    }
+
+    .add-btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .add-btn:active {
+      transform: translateY(0);
+    }
+
+    /* ANIMATION SPLASH (CONFETTI) */
+    .splash-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #eab308;
+      opacity: 0;
+      animation: splash 1s ease-out forwards;
+    }
+
+    @keyframes splash {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) rotate(720deg);
+      }
+    }
+
+    /* TOAST DE CONFIRMATION */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #0f172a;
+      color: white;
+      padding: 1.2rem 2rem;
+      border-radius: 60px;
+      font-weight: 500;
+      transform: translateX(400px);
+      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.3);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    .toast a {
+      color: #eab308;
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 10px;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      transition: background 0.2s;
+    }
+
+    .toast a:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* LOADING SKELETON */
+    .loading-skeleton {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem;
+      color: #94a3b8;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1000px) {
+      .product-page {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1.5rem;
+      }
+
+      .back-link {
+        margin: 1.5rem;
+      }
+
+      .info h1 {
+        font-size: 2.5rem;
+      }
+
+      .current {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<a href="shop.html" class="back-link">
+  <span>←</span> Retour à la boutique
+</a>
+
+<div id="product">
+  <div class="loading-skeleton">Chargement du produit...</div>
+</div>
+
+<!-- TOAST CONFIRMATION -->
+<div id="toast" class="toast">
+  <span>✅</span>
+  <span>Produit ajouté au panier !</span>
+  <a href="cart.html">Voir le panier →</a>
+</div>
+
+<script>
+const API = "https://backend-lbs-shop-59jc.vercel.app/api";
+const id = new URLSearchParams(location.search).get("id");
+
+// Fonction pour créer un effet splash (confetti)
+function createSplash() {
+  const container = document.createElement('div');
+  container.className = 'splash-container';
+  document.body.appendChild(container);
+
+  for (let i = 0; i < 50; i++) {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti';
+    
+    // Couleurs aléatoires
+    const colors = ['#eab308', '#ef4444', '#3b82f6', '#10b981', '#8b5cf6'];
+    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+    
+    // Position de départ (centre de l'écran)
+    confetti.style.left = '50%';
+    confetti.style.top = '50%';
+    
+    // Direction aléatoire
+    const tx = (Math.random() - 0.5) * 800;
+    const ty = (Math.random() - 0.5) * 800 - 200;
+    confetti.style.setProperty('--tx', tx + 'px');
+    confetti.style.setProperty('--ty', ty + 'px');
+    
+    // Taille aléatoire
+    const size = 5 + Math.random() * 15;
+    confetti.style.width = size + 'px';
+    confetti.style.height = size + 'px';
+    
+    // Délai aléatoire
+    confetti.style.animationDelay = Math.random() * 0.2 + 's';
+    
+    container.appendChild(confetti);
+  }
+
+  // Nettoyer après animation
+  setTimeout(() => {
+    container.remove();
+  }, 1500);
+}
+
+// Afficher toast
+function showToast() {
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
+}
+
+async function load() {
+  try {
+    const res = await fetch(`${API}/products`);
+    const products = await res.json();
+    const p = products.find(x => x.id === id);
+
+    if (!p) {
+      product.innerHTML = '<div class="loading-skeleton">Produit non trouvé</div>';
+      return;
+    }
+
+    product.innerHTML = `
+      <div class="product-page">
+        <div class="image-container">
+          <img src="${p.image}" alt="${p.name}">
+          ${p.promo ? `<div class="product-badge">-${p.promo}%</div>` : ''}
+        </div>
+
+        <div class="info">
+          <h1>${p.name}</h1>
+          
+          <div class="price-container">
+            <div class="price">
+              ${p.promo ? `<span class="old">${p.price} FCFA</span>` : ''}
+              <span class="current">${p.finalPrice || p.price}</span>
+            </div>
+          </div>
+
+          ${p.sizes ? `
+            <div class="size-section">
+              <span class="size-label">Choisir une taille</span>
+              <select id="size">
+                ${p.sizes.map(s => `<option>${s}</option>`).join('')}
+              </select>
+            </div>
+          ` : ''}
+
+          <button class="add-btn" onclick='addToCart(${JSON.stringify(p).replace(/'/g, "\\'")})'>
+            <span>🛒</span>
+            Ajouter au panier
+          </button>
+        </div>
+      </div>
+    `;
+  } catch (error) {
+    product.innerHTML = '<div class="loading-skeleton">Erreur de chargement</div>';
+  }
+}
+
+function addToCart(p) {
+  // Récupérer la taille sélectionnée (si existe)
+  const sizeSelect = document.getElementById('size');
+  const selectedSize = sizeSelect ? sizeSelect.value : null;
+
+  // Récupérer le panier actuel
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  
+  // Créer l'article avec ou sans taille
+  const item = {
+    ...p,
+    qty: 1
+  };
+  
+  if (selectedSize) {
+    item.size = selectedSize;
+  }
+  
+  cart.push(item);
+  
+  // Sauvegarder
+  localStorage.setItem('cart', JSON.stringify(cart));
+  
+  // EFFETS SPECTACULAIRES ! 🎉
+  createSplash(); // Confetti
+  showToast();    // Toast de confirmation
+  
+  // Petit effet sur le bouton
+  const btn = document.querySelector('.add-btn');
+  btn.style.transform = 'scale(0.95)';
+  setTimeout(() => {
+    btn.style.transform = '';
+  }, 200);
+}
+
+// Charger le produit
+load();
+</script>
+
+</body>
+</html>
