@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Créer un compte · LBS SHOP</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* RESET & FONTS */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      background: radial-gradient(circle at 10% 30%, #f0f7fc, #d9e9f2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.2rem;
+    }
+
+    /* CARTE PRINCIPALE — STYLE GLASSMORPHISM ÉLÉGANT */
+    .card {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      border-radius: 48px;
+      padding: 2.2rem 2rem 2.5rem;
+      box-shadow: 0 40px 60px -25px rgba(0, 45, 70, 0.4),
+                  0 0 0 1px rgba(255, 255, 255, 0.6) inset,
+                  0 0 0 1px rgba(0, 80, 120, 0.1);
+      transition: all 0.3s cubic-bezier(0.15, 0.85, 0.35, 1.05);
+      border: 1px solid rgba(255,255,255,0.45);
+    }
+
+    .card:hover {
+      box-shadow: 0 50px 75px -20px #0b3f5a;
+      transform: translateY(-5px);
+    }
+
+    /* LOGO — PARFAITEMENT REDIMENSIONNÉ, FIN, ÉLÉGANT */
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .shop-logo {
+      width: auto;
+      max-width: 120px;          /* LIMITATION INTELLIGENTE */
+      height: auto;
+      max-height: 70px;          /* JAMAIS TROP GROS */
+      object-fit: contain;
+      border-radius: 24px;
+      background: white;
+      padding: 8px 16px;
+      box-shadow: 0 12px 22px -14px rgba(0,50,70,0.3),
+                  0 0 0 1px rgba(255,255,255,0.9) inset;
+      transition: transform 0.2s ease;
+    }
+
+    .shop-logo:hover {
+      transform: scale(1.02);
+    }
+
+    /* TITRE */
+    h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      background: linear-gradient(145deg, #0b394b, #1c677d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    h2::after {
+      content: "✨";
+      font-size: 1.8rem;
+      background: none;
+      -webkit-text-fill-color: initial;
+      opacity: 0.7;
+    }
+
+    /* CHAMPS MODERNES — AVEC ICÔNES DOUCES */
+    .input-field {
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+
+    .input-field input {
+      width: 100%;
+      padding: 1rem 1.4rem;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.8);
+      border: 2px solid rgba(160, 195, 215, 0.5);
+      border-radius: 38px;
+      outline: none;
+      transition: all 0.25s ease;
+      color: #0e3a4d;
+      font-weight: 500;
+      box-shadow: 0 4px 10px rgba(0, 35, 50, 0.02);
+      backdrop-filter: blur(4px);
+    }
+
+    .input-field input:focus {
+      border-color: #1a8bb9;
+      background: white;
+      box-shadow: 0 10px 22px -16px #0f7caa, 0 0 0 4px rgba(20, 130, 180, 0.12);
+    }
+
+    .input-field input::placeholder {
+      color: #6c92a8;
+      font-weight: 400;
+      opacity: 0.7;
+    }
+
+    /* BOUTON FANTASTIQUE */
+    .action-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #0e5e7e, #197ca5);
+      border: none;
+      padding: 1.1rem 1.8rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: white;
+      border-radius: 46px;
+      margin: 1.5rem 0 1.8rem;
+      cursor: pointer;
+      box-shadow: 0 18px 35px -14px #0c546e;
+      transition: 0.18s;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      letter-spacing: 0.5px;
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .action-btn:hover {
+      background: linear-gradient(135deg, #0b4d68, #126f96);
+      box-shadow: 0 26px 45px -14px #064053;
+      transform: scale(1.02) translateY(-2px);
+    }
+
+    .action-btn:active {
+      transform: scale(0.99) translateY(2px);
+      box-shadow: 0 10px 20px -10px #052a37;
+    }
+
+    /* LIEN CONNEXION */
+    .login-prompt {
+      text-align: center;
+      font-size: 1rem;
+      color: #1b4f65;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border-top: 2px dotted rgba(80, 140, 170, 0.3);
+      padding-top: 1.6rem;
+      margin-top: 0.5rem;
+    }
+
+    .login-prompt a {
+      color: #09618a;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 0.25rem 0.8rem;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.7);
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+
+    .login-prompt a:hover {
+      background: white;
+      border-color: #1781ac;
+      color: #04384d;
+      box-shadow: 0 4px 10px rgba(0,80,110,0.15);
+    }
+
+    /* PETIT MESSAGE D'ERREUR / SUCCÈS (INTÉGRÉ SI BESOIN) */
+    .toast-fallback {
+      display: none;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 450px) {
+      .card {
+        padding: 1.8rem 1.2rem 2.2rem;
+        border-radius: 38px;
+      }
+      h2 {
+        font-size: 1.8rem;
+      }
+      .shop-logo {
+        max-width: 100px;
+        max-height: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <!-- LOGO ÉLÉGANT ET DE TAILE CONTRÔLÉE -->
+  <div class="logo-container">
+    <img src="https://files.catbox.moe/g1nwhq.jpg" 
+         alt="LBS SHOP" 
+         class="shop-logo"
+         onerror="this.style.display='none'">
+  </div>
+
+  <h2>Créer un compte</h2>
+
+  <div class="input-field">
+    <input id="name" type="text" placeholder="Nom complet" autocomplete="name">
+  </div>
+
+  <div class="input-field">
+    <input id="phone" type="tel" placeholder="Téléphone" autocomplete="tel">
+  </div>
+
+  <div class="input-field">
+    <input id="password" type="password" placeholder="Mot de passe" autocomplete="new-password">
+  </div>
+
+  <button class="action-btn" onclick="register()">
+    <span>🛍️</span> Créer mon compte
+  </button>
+
+  <div class="login-prompt">
+    <span>🔓 Déjà inscrit ?</span>
+    <a href="login.html">Se connecter</a>
+  </div>
+</div>
+
+<script>
+const API = "https://backend-lbs-shop-59jc.vercel.app/api";
+
+async function register() {
+  const nameInput = document.getElementById('name');
+  const phoneInput = document.getElementById('phone');
+  const passwordInput = document.getElementById('password');
+
+  // Validation rapide
+  if (!nameInput.value.trim() || !phoneInput.value.trim() || !passwordInput.value.trim()) {
+    alert("Veuillez remplir tous les champs");
+    return;
+  }
+
+  // Petit feedback au niveau du bouton
+  const btn = document.querySelector('.action-btn');
+  const originalText = btn.innerHTML;
+  btn.innerHTML = '⌛ Création...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(`${API}/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: nameInput.value.trim(),
+        phone: phoneInput.value.trim(),
+        password: passwordInput.value.trim()
+      })
+    });
+
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      alert(errData.message || "Erreur lors de l'inscription");
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+      return;
+    }
+
+    alert("✅ Compte créé ! Bienvenue chez LBS SHOP");
+    location.href = "login.html";
+  } catch (error) {
+    alert("Problème de connexion : " + error.message);
+    btn.innerHTML = originalText;
+    btn.disabled = false;
+  }
+}
+</script>
+
+<!-- petite amélioration : si l'image ne charge pas, on ne voit rien de cassé -->
+</body>
+</html>
