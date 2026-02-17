@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LBS SHOP · ADMIN DASHBOARD</title>
+  <link rel="stylesheet" href="admin.css">
+  <style>
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0c0f;
+      color: #fff;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ===== SIDEBAR CLEAN ===== */
+    .sidebar {
+      width: 260px;
+      background: #111418;
+      border-right: 1px solid #22282f;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .sidebar h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      padding-left: 0.8rem;
+      letter-spacing: -0.5px;
+    }
+
+    .sidebar button {
+      background: transparent;
+      border: none;
+      color: #9aa3af;
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .sidebar button:hover {
+      background: #1e252d;
+      color: #fff;
+    }
+
+    .sidebar button:last-child {
+      margin-top: auto;
+      color: #f87171;
+    }
+
+    .sidebar button:last-child:hover {
+      background: #2d1a1a;
+      color: #fecaca;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main {
+      flex: 1;
+      background: #0f1217;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    /* ===== HEADER SECTION ===== */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-header h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .stats-cards {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .stat-card {
+      background: #1a2029;
+      padding: 0.8rem 1.5rem;
+      border-radius: 16px;
+      border: 1px solid #2a323e;
+    }
+
+    .stat-card span {
+      color: #9aa3af;
+      font-size: 0.9rem;
+    }
+
+    .stat-card p {
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    /* ===== FORMULAIRE STYLÉ ===== */
+    #productForm {
+      background: #1a2029;
+      border-radius: 24px;
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+      border: 1px solid #2a323e;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    #productForm input {
+      background: #0f141c;
+      border: 1px solid #2a323e;
+      padding: 0.9rem 1.2rem;
+      border-radius: 16px;
+      color: #fff;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+
+    #productForm input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      background: #151e2a;
+    }
+
+    #productForm input::placeholder {
+      color: #5f6b7a;
+    }
+
+    #productForm input[type="file"] {
+      padding: 0.7rem;
+      border-style: dashed;
+    }
+
+    #productForm button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 0.9rem 1.5rem;
+      border-radius: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      grid-column: 1 / -1;
+      font-size: 1rem;
+    }
+
+    #productForm button:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+    }
+
+    /* ===== LISTES PRODUITS ===== */
+    #productList, #orderList {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-item, .order-item {
+      background: #1a2029;
+      border-radius: 24px;
+      border: 1px solid #2a323e;
+      overflow: hidden;
+      transition: 0.2s;
+    }
+
+    .product-item:hover, .order-item:hover {
+      border-color: #3b82f6;
+      transform: translateY(-3px);
+    }
+
+    .product-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: #0f141c;
+    }
+
+    .product-info, .order-info {
+      padding: 1.2rem;
+    }
+
+    .product-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .tag {
+      background: #0f141c;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: #9aa3af;
+      border: 1px solid #2a323e;
+    }
+
+    .tag.promo {
+      background: #2d1a1a;
+      color: #f87171;
+      border-color: #7f1d1d;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .edit, .delete {
+      flex: 1;
+      padding: 0.6rem;
+      border-radius: 14px;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .edit {
+      background: #2563eb;
+      color: white;
+    }
+
+    .edit:hover {
+      background: #1d4ed8;
+    }
+
+    .delete {
+      background: #2d1a1a;
+      color: #f87171;
+    }
+
+    .delete:hover {
+      background: #3b1c1c;
+    }
+
+    /* ===== COMMANDES ===== */
+    .order-item {
+      padding: 1rem;
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .order-id {
+      font-weight: 600;
+      color: #3b82f6;
+    }
+
+    .order-status {
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .status-pending {
+      background: #2d241a;
+      color: #fbbf24;
+    }
+
+    .status-paid {
+      background: #1a2d1a;
+      color: #4ade80;
+    }
+
+    .order-details {
+      color: #9aa3af;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .order-total {
+      font-weight: 600;
+      color: #fff;
+      font-size: 1.2rem;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0f1217;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #2a323e;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3f4a5a;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 1rem;
+      }
+
+      .sidebar h2 {
+        display: none;
+      }
+
+      .main {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>LBS SHOP</h2>
+  <button onclick="show('products')">
+    <span>📦</span> Produits
+  </button>
+  <button onclick="show('orders')">
+    <span>📋</span> Commandes
+  </button>
+  <button onclick="logout()">
+    <span>🚪</span> Quitter
+  </button>
+</div>
+
+<div class="main">
+
+<!-- SECTION PRODUITS -->
+<section id="products">
+  <div class="section-header">
+    <h1>Produits</h1>
+    <div class="stats-cards">
+      <div class="stat-card">
+        <span>Total</span>
+        <p id="totalProducts">0</p>
+      </div>
+      <div class="stat-card">
+        <span>En stock</span>
+        <p id="inStock">0</p>
+      </div>
+    </div>
+  </div>
+
+  <form id="productForm">
+    <input name="name" placeholder="Nom du produit" required>
+    <input name="price" placeholder="Prix (FCFA)" required>
+    <input name="promo" placeholder="Promo %">
+    <input name="category" placeholder="Catégorie">
+    <input name="sizes" placeholder="Tailles (ex: S,M,L)">
+    <input name="stock" placeholder="Stock" type="number">
+    <input type="file" name="image" required>
+    <button>➕ Ajouter</button>
+  </form>
+
+  <div id="productList"></div>
+</section>
+
+<!-- SECTION COMMANDES -->
+<section id="orders" style="display:none">
+  <div class="section-header">
+    <h1>Commandes</h1>
+    <div class="stats-cards">
+      <div class="stat-card">
+        <span>En attente</span>
+        <p id="pendingOrders">0</p>
+      </div>
+    </div>
+  </div>
+  <div id="orderList"></div>
+</section>
+
+</div>
+
+<script>
+// Configuration API
+const API = "https://backend-lbs-shop-59jc.vercel.app/api";
+
+// Navigation
+function show(section) {
+  document.getElementById('products').style.display = section === 'products' ? 'block' : 'none';
+  document.getElementById('orders').style.display = section === 'orders' ? 'block' : 'none';
+  
+  if (section === 'orders') loadOrders();
+}
+
+// Déconnexion
+function logout() {
+  localStorage.removeItem('user_token');
+  location.href = '../auth/login.html';
+}
+
+// ===== GESTION PRODUITS =====
+async function loadProducts() {
+  try {
+    const res = await fetch(`${API}/products`);
+    const products = await res.json();
+    
+    document.getElementById('totalProducts').textContent = products.length;
+    document.getElementById('inStock').textContent = products.filter(p => p.stock > 0).length;
+    
+    const list = document.getElementById('productList');
+    list.innerHTML = products.map(p => `
+      <div class="product-item">
+        <img src="${p.image}" alt="${p.name}">
+        <div class="product-info">
+          <h3>${p.name}</h3>
+          <div class="tags">
+            <span class="tag">${p.category || 'Général'}</span>
+            ${p.promo ? `<span class="tag promo">-${p.promo}%</span>` : ''}
+            <span class="tag">Stock: ${p.stock || 0}</span>
+          </div>
+          <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; color: #fff;">
+            ${p.finalPrice || p.price} FCFA
+          </div>
+          <div class="product-actions">
+            <button class="edit" onclick="editProduct('${p.id}')">Modifier</button>
+            <button class="delete" onclick="deleteProduct('${p.id}')">Supprimer</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  } catch (error) {
+    console.error('Erreur chargement produits:', error);
+  }
+}
+
+// ===== GESTION COMMANDES =====
+async function loadOrders() {
+  try {
+    const res = await fetch(`${API}/orders`);
+    const orders = await res.json();
+    
+    document.getElementById('pendingOrders').textContent = orders.filter(o => o.status === 'pending').length;
+    
+    const list = document.getElementById('orderList');
+    list.innerHTML = orders.map(o => `
+      <div class="order-item">
+        <div class="order-header">
+          <span class="order-id">#${o.id.slice(0,8)}</span>
+          <span class="order-status status-${o.status}">${o.status}</span>
+        </div>
+        <div class="order-details">
+          ${o.customer?.name || 'Client'} · ${o.items?.length || 0} articles
+        </div>
+        <div class="order-total">
+          ${o.total} FCFA
+        </div>
+      </div>
+    `).join('');
+  } catch (error) {
+    console.error('Erreur chargement commandes:', error);
+  }
+}
+
+// Actions produits
+async function deleteProduct(id) {
+  if (!confirm('Supprimer ce produit ?')) return;
+  // Appel API delete ici
+  loadProducts();
+}
+
+function editProduct(id) {
+  alert('Édition du produit ' + id);
+}
+
+// Formulaire ajout produit
+document.getElementById('productForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  
+  try {
+    const res = await fetch(`${API}/products`, {
+      method: 'POST',
+      body: formData
+    });
+    
+    if (res.ok) {
+      e.target.reset();
+      loadProducts();
+      alert('✅ Produit ajouté');
+    }
+  } catch (error) {
+    alert('Erreur: ' + error.message);
+  }
+});
+
+// Chargement initial
+loadProducts();
+</script>
+
+</body>
+</html>
