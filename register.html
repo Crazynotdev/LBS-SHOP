@@ -1,302 +1,571 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Créer un compte · LBS SHOP</title>
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    /* RESET & FONTS */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - LBS SHOP · Drip Premium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      min-height: 100vh;
-      background: radial-gradient(circle at 10% 30%, #f0f7fc, #d9e9f2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.2rem;
-    }
+        :root {
+            --primary: #ff3b5c;
+            --primary-dark: #e62e4d;
+            --dark: #0a0a0f;
+            --dark-light: #1a1a25;
+            --gray: #2a2a35;
+            --light: #f5f5fa;
+            --white: #ffffff;
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-hover: 0 30px 60px -12px rgba(255, 59, 92, 0.35);
+        }
 
-    /* CARTE PRINCIPALE — STYLE GLASSMORPHISM ÉLÉGANT */
-    .card {
-      width: 100%;
-      max-width: 440px;
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(18px) saturate(180%);
-      -webkit-backdrop-filter: blur(18px) saturate(180%);
-      border-radius: 48px;
-      padding: 2.2rem 2rem 2.5rem;
-      box-shadow: 0 40px 60px -25px rgba(0, 45, 70, 0.4),
-                  0 0 0 1px rgba(255, 255, 255, 0.6) inset,
-                  0 0 0 1px rgba(0, 80, 120, 0.1);
-      transition: all 0.3s cubic-bezier(0.15, 0.85, 0.35, 1.05);
-      border: 1px solid rgba(255,255,255,0.45);
-    }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(145deg, #0a0a0f, #1a1a25);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .card:hover {
-      box-shadow: 0 50px 75px -20px #0b3f5a;
-      transform: translateY(-5px);
-    }
+        /* Effet de fond minimal */
+        .bg-gradient {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 59, 92, 0.1) 0%, transparent 60%),
+                        radial-gradient(circle at 70% 50%, rgba(255, 59, 92, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+            animation: bg-pulse 8s infinite alternate;
+        }
 
-    /* LOGO — PARFAITEMENT REDIMENSIONNÉ, FIN, ÉLÉGANT */
-    .logo-container {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-    }
+        @keyframes bg-pulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
 
-    .shop-logo {
-      width: auto;
-      max-width: 120px;          /* LIMITATION INTELLIGENTE */
-      height: auto;
-      max-height: 70px;          /* JAMAIS TROP GROS */
-      object-fit: contain;
-      border-radius: 24px;
-      background: white;
-      padding: 8px 16px;
-      box-shadow: 0 12px 22px -14px rgba(0,50,70,0.3),
-                  0 0 0 1px rgba(255,255,255,0.9) inset;
-      transition: transform 0.2s ease;
-    }
+        /* Container principal */
+        .auth-container {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 32px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 460px;
+            position: relative;
+            z-index: 10;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: container-appear 0.6s ease-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .shop-logo:hover {
-      transform: scale(1.02);
-    }
+        .auth-container:hover {
+            box-shadow: var(--shadow-hover);
+        }
 
-    /* TITRE */
-    h2 {
-      font-size: 2rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      background: linear-gradient(145deg, #0b394b, #1c677d);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 1.8rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
+        @keyframes container-appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    h2::after {
-      content: "✨";
-      font-size: 1.8rem;
-      background: none;
-      -webkit-text-fill-color: initial;
-      opacity: 0.7;
-    }
+        /* Header */
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
 
-    /* CHAMPS MODERNES — AVEC ICÔNES DOUCES */
-    .input-field {
-      margin-bottom: 1.2rem;
-      position: relative;
-    }
+        .logo {
+            height: 70px;
+            width: auto;
+            margin-bottom: 1.5rem;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: drop-shadow(0 10px 20px rgba(255, 59, 92, 0.2));
+        }
 
-    .input-field input {
-      width: 100%;
-      padding: 1rem 1.4rem;
-      font-size: 1rem;
-      background: rgba(255, 255, 255, 0.8);
-      border: 2px solid rgba(160, 195, 215, 0.5);
-      border-radius: 38px;
-      outline: none;
-      transition: all 0.25s ease;
-      color: #0e3a4d;
-      font-weight: 500;
-      box-shadow: 0 4px 10px rgba(0, 35, 50, 0.02);
-      backdrop-filter: blur(4px);
-    }
+        .logo:hover {
+            transform: scale(1.08) rotate(1deg);
+            filter: drop-shadow(0 15px 30px rgba(255, 59, 92, 0.3));
+        }
 
-    .input-field input:focus {
-      border-color: #1a8bb9;
-      background: white;
-      box-shadow: 0 10px 22px -16px #0f7caa, 0 0 0 4px rgba(20, 130, 180, 0.12);
-    }
+        .auth-header h1 {
+            color: var(--dark);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.5px;
+        }
 
-    .input-field input::placeholder {
-      color: #6c92a8;
-      font-weight: 400;
-      opacity: 0.7;
-    }
+        .auth-header p {
+            color: #6b6b7b;
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
 
-    /* BOUTON FANTASTIQUE */
-    .action-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #0e5e7e, #197ca5);
-      border: none;
-      padding: 1.1rem 1.8rem;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: white;
-      border-radius: 46px;
-      margin: 1.5rem 0 1.8rem;
-      cursor: pointer;
-      box-shadow: 0 18px 35px -14px #0c546e;
-      transition: 0.18s;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      letter-spacing: 0.5px;
-      backdrop-filter: blur(5px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
+        /* Messages */
+        .message {
+            padding: 0.9rem 1.2rem;
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: none;
+            align-items: center;
+            gap: 0.6rem;
+            animation: message-slide 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
 
-    .action-btn:hover {
-      background: linear-gradient(135deg, #0b4d68, #126f96);
-      box-shadow: 0 26px 45px -14px #064053;
-      transform: scale(1.02) translateY(-2px);
-    }
+        @keyframes message-slide {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .action-btn:active {
-      transform: scale(0.99) translateY(2px);
-      box-shadow: 0 10px 20px -10px #052a37;
-    }
+        .error-message {
+            background: #fee9e9;
+            color: #d32f2f;
+            border-left: 4px solid #d32f2f;
+        }
 
-    /* LIEN CONNEXION */
-    .login-prompt {
-      text-align: center;
-      font-size: 1rem;
-      color: #1b4f65;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      border-top: 2px dotted rgba(80, 140, 170, 0.3);
-      padding-top: 1.6rem;
-      margin-top: 0.5rem;
-    }
+        .success-message {
+            background: #e6f7e6;
+            color: #2e7d32;
+            border-left: 4px solid #2e7d32;
+        }
 
-    .login-prompt a {
-      color: #09618a;
-      text-decoration: none;
-      font-weight: 700;
-      padding: 0.25rem 0.8rem;
-      border-radius: 50px;
-      background: rgba(255,255,255,0.7);
-      transition: all 0.2s;
-      border: 1px solid transparent;
-    }
+        /* Formulaire */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
 
-    .login-prompt a:hover {
-      background: white;
-      border-color: #1781ac;
-      color: #04384d;
-      box-shadow: 0 4px 10px rgba(0,80,110,0.15);
-    }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
 
-    /* PETIT MESSAGE D'ERREUR / SUCCÈS (INTÉGRÉ SI BESOIN) */
-    .toast-fallback {
-      display: none;
-    }
+        .input-wrapper {
+            position: relative;
+            transition: all 0.3s ease;
+        }
 
-    /* RESPONSIVE */
-    @media (max-width: 450px) {
-      .card {
-        padding: 1.8rem 1.2rem 2.2rem;
-        border-radius: 38px;
-      }
-      h2 {
-        font-size: 1.8rem;
-      }
-      .shop-logo {
-        max-width: 100px;
-        max-height: 60px;
-      }
-    }
-  </style>
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: var(--primary);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 48px;
+            border: 2px solid #f0f0f0;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: white;
+            font-family: 'Inter', sans-serif;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(255, 59, 92, 0.1);
+        }
+
+        input::placeholder {
+            color: #b0b0c0;
+            font-size: 0.9rem;
+        }
+
+        /* Indicateur de force du mot de passe */
+        .password-strength {
+            margin-top: 0.5rem;
+            height: 4px;
+            border-radius: 2px;
+            background: #f0f0f0;
+            overflow: hidden;
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0;
+            transition: width 0.3s ease, background-color 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .strength-text {
+            font-size: 0.75rem;
+            margin-top: 0.3rem;
+            color: #8a8a9a;
+            text-align: right;
+        }
+
+        /* Bouton d'inscription */
+        .submit-btn {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1.5rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(255, 59, 92, 0.3);
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 59, 92, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .loader {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Lien de connexion */
+        .login-link {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 2px solid #f5f5f5;
+        }
+
+        .login-link p {
+            color: #6b6b7b;
+            font-size: 0.95rem;
+        }
+
+        .login-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .login-link a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .login-link a:hover::after {
+            width: 100%;
+        }
+
+        /* Animation de secousse */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+        }
+
+        .shake {
+            animation: shake 0.5s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 2rem;
+            }
+
+            .logo {
+                height: 60px;
+            }
+
+            .auth-header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="bg-gradient"></div>
 
-<div class="card">
-  <!-- LOGO ÉLÉGANT ET DE TAILE CONTRÔLÉE -->
-  <div class="logo-container">
-    <img src="https://files.catbox.moe/g1nwhq.jpg" 
-         alt="LBS SHOP" 
-         class="shop-logo"
-         onerror="this.style.display='none'">
-  </div>
+    <div class="auth-container">
+        <div class="auth-header">
+            <img src="https://files.catbox.moe/tvfdek.jpg" alt="LBS SHOP" class="logo">
+            <h1>Bienvenue</h1>
+            <p>Créez votre compte LBS SHOP</p>
+        </div>
 
-  <h2>Créer un compte</h2>
+        <!-- Messages -->
+        <div class="message error-message" id="error-msg">
+            <span>❌</span>
+            <span id="error-text"></span>
+        </div>
+        <div class="message success-message" id="success-msg">
+            <span>✅</span>
+            <span id="success-text"></span>
+        </div>
 
-  <div class="input-field">
-    <input id="name" type="text" placeholder="Nom complet" autocomplete="name">
-  </div>
+        <!-- Formulaire -->
+        <form id="register-form" onsubmit="handleRegister(event)">
+            <div class="form-group">
+                <label for="name">Nom complet</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">👤</span>
+                    <input type="text" id="name" required placeholder="Jean Dupont" autocomplete="name">
+                </div>
+            </div>
 
-  <div class="input-field">
-    <input id="phone" type="tel" placeholder="Téléphone" autocomplete="tel">
-  </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">📧</span>
+                    <input type="email" id="email" required placeholder="votre@email.com" autocomplete="email">
+                </div>
+            </div>
 
-  <div class="input-field">
-    <input id="password" type="password" placeholder="Mot de passe" autocomplete="new-password">
-  </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🔒</span>
+                    <input type="password" id="password" required placeholder="••••••••" minlength="6" autocomplete="new-password">
+                </div>
+                <div class="password-strength">
+                    <div class="strength-bar" id="strength-bar"></div>
+                </div>
+                <div class="strength-text" id="strength-text">6 caractères minimum</div>
+            </div>
 
-  <button class="action-btn" onclick="register()">
-    <span>🛍️</span> Créer mon compte
-  </button>
+            <div class="form-group">
+                <label for="password-confirm">Confirmer le mot de passe</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🔐</span>
+                    <input type="password" id="password-confirm" required placeholder="••••••••" minlength="6" autocomplete="new-password">
+                </div>
+            </div>
 
-  <div class="login-prompt">
-    <span>🔓 Déjà inscrit ?</span>
-    <a href="login.html">Se connecter</a>
-  </div>
-</div>
+            <button type="submit" class="submit-btn" id="submit-btn">
+                <div class="btn-content">
+                    <span id="btn-text">S'inscrire</span>
+                    <div class="loader" id="loader"></div>
+                </div>
+            </button>
+        </form>
 
-<script>
-const API = "https://backend-lbs-shop-59jc.vercel.app/api";
+        <!-- Lien de connexion -->
+        <div class="login-link">
+            <p>Déjà inscrit ? <a href="login.html">Se connecter</a></p>
+        </div>
+    </div>
 
-async function register() {
-  const nameInput = document.getElementById('name');
-  const phoneInput = document.getElementById('phone');
-  const passwordInput = document.getElementById('password');
+    <script>
+        const API_URL = 'http://localhost:5000/api';
 
-  // Validation rapide
-  if (!nameInput.value.trim() || !phoneInput.value.trim() || !passwordInput.value.trim()) {
-    alert("Veuillez remplir tous les champs");
-    return;
-  }
+        // Éléments du DOM
+        const passwordInput = document.getElementById('password');
+        const confirmInput = document.getElementById('password-confirm');
+        const strengthBar = document.getElementById('strength-bar');
+        const strengthText = document.getElementById('strength-text');
 
-  // Petit feedback au niveau du bouton
-  const btn = document.querySelector('.action-btn');
-  const originalText = btn.innerHTML;
-  btn.innerHTML = '⌛ Création...';
-  btn.disabled = true;
+        // Vérification de la force du mot de passe en temps réel
+        passwordInput.addEventListener('input', checkPasswordStrength);
+        confirmInput.addEventListener('input', checkPasswordMatch);
 
-  try {
-    const res = await fetch(`${API}/auth/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: nameInput.value.trim(),
-        phone: phoneInput.value.trim(),
-        password: passwordInput.value.trim()
-      })
-    });
+        function checkPasswordStrength() {
+            const password = passwordInput.value;
+            let strength = 0;
+            let color = '#ff3b5c';
+            let text = 'Faible';
 
-    if (!res.ok) {
-      const errData = await res.json().catch(() => ({}));
-      alert(errData.message || "Erreur lors de l'inscription");
-      btn.innerHTML = originalText;
-      btn.disabled = false;
-      return;
-    }
+            if (password.length >= 6) strength += 25;
+            if (password.length >= 8) strength += 25;
+            if (/[A-Z]/.test(password)) strength += 25;
+            if (/[0-9]/.test(password)) strength += 25;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 25;
 
-    alert("✅ Compte créé ! Bienvenue chez LBS SHOP");
-    location.href = "login.html";
-  } catch (error) {
-    alert("Problème de connexion : " + error.message);
-    btn.innerHTML = originalText;
-    btn.disabled = false;
-  }
-}
-</script>
+            strength = Math.min(strength, 100);
 
-<!-- petite amélioration : si l'image ne charge pas, on ne voit rien de cassé -->
+            if (strength >= 75) {
+                color = '#10b981';
+                text = 'Fort';
+            } else if (strength >= 50) {
+                color = '#f59e0b';
+                text = 'Moyen';
+            } else {
+                color = '#ef4444';
+                text = 'Faible';
+            }
+
+            strengthBar.style.width = strength + '%';
+            strengthBar.style.backgroundColor = color;
+            strengthText.textContent = `Force : ${text}`;
+        }
+
+        function checkPasswordMatch() {
+            const password = passwordInput.value;
+            const confirm = confirmInput.value;
+
+            if (confirm.length > 0) {
+                if (password === confirm) {
+                    confirmInput.style.borderColor = '#10b981';
+                } else {
+                    confirmInput.style.borderColor = '#ef4444';
+                }
+            } else {
+                confirmInput.style.borderColor = '#f0f0f0';
+            }
+        }
+
+        // Gestion de l'inscription
+        async function handleRegister(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const passwordConfirm = document.getElementById('password-confirm').value;
+            
+            const loader = document.getElementById('loader');
+            const btnText = document.getElementById('btn-text');
+            const errorMsg = document.getElementById('error-msg');
+            const errorText = document.getElementById('error-text');
+            const successMsg = document.getElementById('success-msg');
+            const successText = document.getElementById('success-text');
+            const submitBtn = document.getElementById('submit-btn');
+            const container = document.querySelector('.auth-container');
+
+            // Reset messages
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+
+            // Validation des mots de passe
+            if (password !== passwordConfirm) {
+                errorText.textContent = 'Les mots de passe ne correspondent pas';
+                errorMsg.style.display = 'flex';
+                container.classList.add('shake');
+                setTimeout(() => container.classList.remove('shake'), 500);
+                return;
+            }
+
+            if (password.length < 6) {
+                errorText.textContent = 'Le mot de passe doit contenir au moins 6 caractères';
+                errorMsg.style.display = 'flex';
+                container.classList.add('shake');
+                setTimeout(() => container.classList.remove('shake'), 500);
+                return;
+            }
+            
+            // Loading state
+            loader.style.display = 'block';
+            btnText.style.display = 'none';
+            submitBtn.style.opacity = '0.8';
+            submitBtn.style.pointerEvents = 'none';
+
+            try {
+                const response = await fetch(`${API_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    successText.textContent = 'Compte créé avec succès ! Redirection vers la connexion...';
+                    successMsg.style.display = 'flex';
+                    
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 2000);
+                } else {
+                    errorText.textContent = data.error || 'Erreur lors de l\'inscription';
+                    errorMsg.style.display = 'flex';
+                    
+                    container.classList.add('shake');
+                    setTimeout(() => container.classList.remove('shake'), 500);
+                }
+            } catch (error) {
+                errorText.textContent = 'Erreur de connexion au serveur';
+                errorMsg.style.display = 'flex';
+                console.error('Erreur:', error);
+                
+                container.classList.add('shake');
+                setTimeout(() => container.classList.remove('shake'), 500);
+            } finally {
+                loader.style.display = 'none';
+                btnText.style.display = 'inline';
+                submitBtn.style.opacity = '1';
+                submitBtn.style.pointerEvents = 'auto';
+            }
+        }
+
+        // Animation focus sur les inputs
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    input.parentElement.style.transform = 'scale(1.02)';
+                });
+                input.addEventListener('blur', () => {
+                    input.parentElement.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
