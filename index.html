@@ -1,361 +1,451 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Connexion · LBS SHOP</title>
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    /* RESET & FONTS */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LBS SHOP - Maillots & Drip Premium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      min-height: 100vh;
-      background: radial-gradient(circle at 70% 20%, #f0f7fc, #d4e4ee);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.2rem;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
 
-    /* CARTE GLASSMORPHISM ÉLÉGANTE */
-    .card {
-      width: 100%;
-      max-width: 440px;
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(18px) saturate(180%);
-      -webkit-backdrop-filter: blur(18px) saturate(180%);
-      border-radius: 48px;
-      padding: 2.2rem 2rem 2.5rem;
-      box-shadow: 0 40px 60px -25px rgba(0, 45, 70, 0.4),
-                  0 0 0 1px rgba(255, 255, 255, 0.6) inset,
-                  0 0 0 1px rgba(0, 80, 120, 0.1);
-      transition: all 0.3s cubic-bezier(0.15, 0.85, 0.35, 1.05);
-      border: 1px solid rgba(255,255,255,0.45);
-    }
+        /* HEADER & NAV */
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    .card:hover {
-      box-shadow: 0 50px 75px -20px #0b3f5a;
-      transform: translateY(-5px);
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    /* LOGO ÉLÉGANT */
-    .logo-container {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-    }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .shop-logo {
-      width: auto;
-      max-width: 120px;
-      height: auto;
-      max-height: 70px;
-      object-fit: contain;
-      border-radius: 24px;
-      background: white;
-      padding: 8px 16px;
-      box-shadow: 0 12px 22px -14px rgba(0,50,70,0.3),
-                  0 0 0 1px rgba(255,255,255,0.9) inset;
-      transition: transform 0.2s ease;
-    }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .shop-logo:hover {
-      transform: scale(1.02);
-    }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
 
-    /* TITRE */
-    h2 {
-      font-size: 2rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      background: linear-gradient(145deg, #0b394b, #1c677d);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 1.8rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
 
-    h2::after {
-      content: "🔐";
-      font-size: 1.8rem;
-      background: none;
-      -webkit-text-fill-color: initial;
-      opacity: 0.7;
-    }
+        .nav-links a:hover {
+            color: #ff6b6b;
+            transform: translateY(-2px);
+        }
 
-    /* CHAMPS MODERNES */
-    .input-field {
-      margin-bottom: 1.2rem;
-      position: relative;
-    }
+        .auth-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
 
-    .input-field input {
-      width: 100%;
-      padding: 1rem 1.4rem;
-      font-size: 1rem;
-      background: rgba(255, 255, 255, 0.8);
-      border: 2px solid rgba(160, 195, 215, 0.5);
-      border-radius: 38px;
-      outline: none;
-      transition: all 0.25s ease;
-      color: #0e3a4d;
-      font-weight: 500;
-      box-shadow: 0 4px 10px rgba(0, 35, 50, 0.02);
-      backdrop-filter: blur(4px);
-    }
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
 
-    .input-field input:focus {
-      border-color: #1a8bb9;
-      background: white;
-      box-shadow: 0 10px 22px -16px #0f7caa, 0 0 0 4px rgba(20, 130, 180, 0.12);
-    }
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
 
-    .input-field input::placeholder {
-      color: #6c92a8;
-      font-weight: 400;
-      opacity: 0.7;
-    }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: slideDown 0.8s ease;
+        }
 
-    /* BOUTON DE CONNEXION */
-    .action-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #0e5e7e, #197ca5);
-      border: none;
-      padding: 1.1rem 1.8rem;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: white;
-      border-radius: 46px;
-      margin: 1.5rem 0 1.8rem;
-      cursor: pointer;
-      box-shadow: 0 18px 35px -14px #0c546e;
-      transition: 0.18s;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      letter-spacing: 0.5px;
-      backdrop-filter: blur(5px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
 
-    .action-btn:hover {
-      background: linear-gradient(135deg, #0b4d68, #126f96);
-      box-shadow: 0 26px 45px -14px #064053;
-      transform: scale(1.02) translateY(-2px);
-    }
+        .hero-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
 
-    .action-btn:active {
-      transform: scale(0.99) translateY(2px);
-      box-shadow: 0 10px 20px -10px #052a37;
-    }
+        .hero-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+        }
 
-    /* LIEN VERS INSCRIPTION */
-    .register-prompt {
-      text-align: center;
-      font-size: 1rem;
-      color: #1b4f65;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      border-top: 2px dotted rgba(80, 140, 170, 0.3);
-      padding-top: 1.6rem;
-      margin-top: 0.5rem;
-    }
+        /* FEATURES */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
 
-    .register-prompt a {
-      color: #09618a;
-      text-decoration: none;
-      font-weight: 700;
-      padding: 0.25rem 0.8rem;
-      border-radius: 50px;
-      background: rgba(255,255,255,0.7);
-      transition: all 0.2s;
-      border: 1px solid transparent;
-    }
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
 
-    .register-prompt a:hover {
-      background: white;
-      border-color: #1781ac;
-      color: #04384d;
-      box-shadow: 0 4px 10px rgba(0,80,110,0.15);
-    }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
 
-    /* MESSAGE D'ERREUR PERSONNALISÉ */
-    .error-message {
-      background: rgba(255, 80, 80, 0.1);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 100, 100, 0.3);
-      color: #b13e3e;
-      padding: 0.8rem 1.2rem;
-      border-radius: 60px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      margin-bottom: 1rem;
-      display: none;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 12px rgba(200, 50, 50, 0.1);
-    }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
 
-    .error-message.show {
-      display: flex;
-    }
+        .feature-card h3 {
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
 
-    .error-message span {
-      font-size: 1.2rem;
-    }
+        .feature-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
 
-    /* RESPONSIVE */
-    @media (max-width: 450px) {
-      .card {
-        padding: 1.8rem 1.2rem 2.2rem;
-        border-radius: 38px;
-      }
-      h2 {
-        font-size: 1.8rem;
-      }
-      .shop-logo {
-        max-width: 100px;
-        max-height: 60px;
-      }
-    }
-  </style>
+        /* PRODUCTS SECTION */
+        .products-section {
+            background: white;
+            padding: 4rem 0;
+            margin-top: 3rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1a1a1a;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            color: #ff6b6b;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .product-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+            border: none;
+            padding: 0.7rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .product-btn:hover {
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        /* FOOTER */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #ff6b6b;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: #ff6b6b;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            color: #999;
+        }
+
+        /* ANIMATIONS */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- HEADER -->
+    <header>
+        <nav class="container">
+            <div class="logo">🔥 LBS SHOP</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="shop.html">Boutique</a></li>
+                <li><a href="orders.html" id="orders-link" style="display: none;">Mes Commandes</a></li>
+                <li><a href="cart.html" id="cart-link" style="display: none;">🛒 Panier</a></li>
+                <li id="auth-container">
+                    <a href="login.html" class="auth-btn">Connexion</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-<div class="card">
-  <!-- LOGO -->
-  <div class="logo-container">
-    <img src="https://files.catbox.moe/g1nwhq.jpg" 
-         alt="LBS SHOP" 
-         class="shop-logo"
-         onerror="this.style.display='none'">
-  </div>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <h1>⚽ Maillots & Drip Premium 🔥</h1>
+            <p>Découvrez la meilleure collection de maillots foot, basket et streetwear du Gabon</p>
+            <button class="hero-btn" onclick="location.href='shop.html'">Commencer les achats</button>
+        </div>
+    </section>
 
-  <h2>Connexion</h2>
+    <!-- FEATURES -->
+    <section class="container">
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🚚</div>
+                <h3>Livraison Rapide</h3>
+                <p>Livraison sécurisée avec QR Code</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Paiement Sécurisé</h3>
+                <p>Vos données sont protégées</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⭐</div>
+                <h3>Qualité Garantie</h3>
+                <p>Produits authentiques & premium</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📞</div>
+                <h3>Support 24/7</h3>
+                <p>Nous sommes toujours là pour vous</p>
+            </div>
+        </div>
+    </section>
 
-  <!-- Message d'erreur élégant -->
-  <div class="error-message" id="errorMessage">
-    <span>⚠️</span> <span id="errorText">Identifiants incorrects</span>
-  </div>
+    <!-- PRODUCTS -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">Produits Vedettes</h2>
+            <div class="products-grid" id="featured-products">
+                <!-- Charger dynamiquement -->
+            </div>
+        </div>
+    </section>
 
-  <div class="input-field">
-    <input id="phone" type="tel" placeholder="Téléphone" autocomplete="tel" value="">
-  </div>
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>LBS SHOP</h4>
+                    <p>Maillots & Drip Premium du Gabon 🇬🇦</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens Rapides</h4>
+                    <p><a href="#">À propos</a></p>
+                    <p><a href="#">Conditions</a></p>
+                    <p><a href="#">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>📧 info@lbsshop.ga</p>
+                    <p>📞 +241 XX XXX XXXX</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 LBS SHOP. Tous droits réservés. 🔥</p>
+            </div>
+        </div>
+    </footer>
 
-  <div class="input-field">
-    <input id="password" type="password" placeholder="Mot de passe" autocomplete="current-password">
-  </div>
+    <script>
+        const API_URL = 'http://localhost:5000/api';
 
-  <button class="action-btn" onclick="login()">
-    <span>🔑</span> Se connecter
-  </button>
+        // Charger les produits
+        async function loadFeaturedProducts() {
+            try {
+                const response = await fetch(`${API_URL}/products`);
+                const products = await response.json();
+                const container = document.getElementById('featured-products');
+                container.innerHTML = products.slice(0, 4).map(p => `
+                    <div class="product-card">
+                        <div class="product-image">⚽</div>
+                        <div class="product-info">
+                            <div class="product-name">${p.name}</div>
+                            <div class="product-price">${p.price.toLocaleString()} FCFA</div>
+                            <button class="product-btn" onclick="addToCart('${p.id}')">Ajouter</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Erreur:', error);
+            }
+        }
 
-  <div class="register-prompt">
-    <span>✨ Pas encore de compte ?</span>
-    <a href="register.html">Créer un compte</a>
-  </div>
-</div>
+        // Ajouter au panier
+        function addToCart(productId) {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Connectez-vous d\'abord');
+                window.location.href = 'login.html';
+                return;
+            }
+            alert('Produit ajouté au panier!');
+        }
 
-<script>
-const API = "https://backend-lbs-shop-59jc.vercel.app/api";
+        // Vérifier authentification
+        function checkAuth() {
+            const token = localStorage.getItem('token');
+            const authContainer = document.getElementById('auth-container');
+            const ordersLink = document.getElementById('orders-link');
+            const cartLink = document.getElementById('cart-link');
+            
+            if (token) {
+                authContainer.innerHTML = `<button class="auth-btn" onclick="logout()">Déconnexion</button>`;
+                ordersLink.style.display = 'block';
+                cartLink.style.display = 'block';
+            }
+        }
 
-// Fonction pour afficher les erreurs joliment
-function showError(message) {
-  const errorDiv = document.getElementById('errorMessage');
-  const errorText = document.getElementById('errorText');
-  errorText.textContent = message || "Identifiants incorrects";
-  errorDiv.classList.add('show');
-  
-  // Faire disparaître après 4 secondes
-  setTimeout(() => {
-    errorDiv.classList.remove('show');
-  }, 4000);
-}
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.reload();
+        }
 
-async function login() {
-  const phoneInput = document.getElementById('phone');
-  const passwordInput = document.getElementById('password');
-  const btn = document.querySelector('.action-btn');
-
-  // Cacher les anciennes erreurs
-  document.getElementById('errorMessage').classList.remove('show');
-
-  // Validation rapide
-  if (!phoneInput.value.trim() || !passwordInput.value.trim()) {
-    showError("Veuillez remplir tous les champs");
-    return;
-  }
-
-  // Sauvegarder le texte original du bouton
-  const originalText = btn.innerHTML;
-  btn.innerHTML = '<span>⏳</span> Connexion...';
-  btn.disabled = true;
-
-  try {
-    const res = await fetch(`${API}/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        phone: phoneInput.value.trim(),
-        password: passwordInput.value.trim()
-      })
-    });
-
-    const data = await res.json().catch(() => null);
-
-    if (!res.ok || !data) {
-      // Gestion fine des erreurs
-      if (res.status === 401) {
-        showError("Téléphone ou mot de passe incorrect");
-      } else if (res.status === 404) {
-        showError("Compte introuvable");
-      } else {
-        showError(data?.message || "Erreur de connexion");
-      }
-      
-      btn.innerHTML = originalText;
-      btn.disabled = false;
-      return;
-    }
-
-    // Succès !
-    localStorage.setItem("user_token", data.token);
-    localStorage.setItem("user", JSON.stringify(data.user));
-    
-    // Petit message de bienvenue personnalisé
-    const userName = data.user?.name || "client";
-    alert(`🎉 Bienvenue ${userName} ! Redirection vers la boutique...`);
-    
-    // Redirection
-    location.href = "shop.html";
-    
-  } catch (error) {
-    showError("Problème réseau : " + error.message);
-    btn.innerHTML = originalText;
-    btn.disabled = false;
-  }
-}
-
-// Ajouter la touche Entrée pour soumettre plus facilement
-document.addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') {
-    login();
-  }
-});
-</script>
-
+        // Initialisation
+        checkAuth();
+        loadFeaturedProducts();
+    </script>
 </body>
 </html>
