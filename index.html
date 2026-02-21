@@ -2,479 +2,256 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LBS SHOP · Maillots & Drip Premium</title>
+    <title>LBS SHOP · Drip Gabon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        /* ===== RESET & FONTS ===== */
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #ff3b5c;
-            --primary-dark: #e62e4d;
-            --dark: #0a0a0f;
-            --dark-light: #1a1a25;
-            --gray: #2a2a35;
-            --light: #f5f5fa;
-            --white: #ffffff;
-            --shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            --shadow-hover: 0 25px 45px rgba(255, 59, 92, 0.25);
-        }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--light);
-            color: var(--dark);
-            line-height: 1.5;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* ===== HEADER & MENU BURGER ===== */
-        header {
-            background: var(--dark);
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
+        /* ===== SPLASH AVEC VIDÉO ===== */
+        .splash {
+            position: fixed;
             top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo img {
-            height: 45px;
-            width: auto;
-            display: block;
-            transition: transform 0.3s ease;
-        }
-
-        .logo img:hover {
-            transform: scale(1.05);
-        }
-
-        /* Menu burger - caché par défaut sur desktop */
-        .burger-menu {
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 20px;
-            cursor: pointer;
-            z-index: 1001;
-            position: relative;
-        }
-
-        .burger-menu span {
-            width: 100%;
-            height: 3px;
-            background: white;
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-
-        .burger-menu.active span:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
-            background: var(--primary);
-        }
-
-        .burger-menu.active span:nth-child(2) {
-            opacity: 0;
-            transform: translateX(-10px);
-        }
-
-        .burger-menu.active span:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
-            background: var(--primary);
-        }
-
-        /* Navigation - desktop */
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
             left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
             width: 100%;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .auth-btn {
-            background: var(--primary);
-            color: white;
-            padding: 0.7rem 1.8rem;
-            border: none;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 59, 92, 0.3);
-        }
-
-        .auth-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 59, 92, 0.5);
-            background: #ff4d6d;
-        }
-
-        /* ===== MENU MOBILE (INTERACTIF) ===== */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 85%;
-            max-width: 400px;
             height: 100vh;
-            background: var(--dark);
-            z-index: 999;
-            padding: 100px 30px 40px;
-            transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-            box-shadow: var(--shadow);
-            overflow-y: auto;
-            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.8s cubic-bezier(0.87, 0, 0.13, 1);
         }
 
-        .mobile-menu.active {
-            right: 0;
+        .splash.hide {
+            transform: translateY(-100%);
         }
 
-        .mobile-menu .menu-header {
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu .menu-header img {
-            height: 40px;
-            width: auto;
-            margin-bottom: 20px;
-        }
-
-        .mobile-menu .menu-links {
-            list-style: none;
-        }
-
-        .mobile-menu .menu-links li {
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: translateX(30px);
-            transition: all 0.4s ease;
-        }
-
-        .mobile-menu.active .menu-links li {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .mobile-menu.active .menu-links li:nth-child(1) { transition-delay: 0.1s; }
-        .mobile-menu.active .menu-links li:nth-child(2) { transition-delay: 0.2s; }
-        .mobile-menu.active .menu-links li:nth-child(3) { transition-delay: 0.3s; }
-        .mobile-menu.active .menu-links li:nth-child(4) { transition-delay: 0.4s; }
-        .mobile-menu.active .menu-links li:nth-child(5) { transition-delay: 0.5s; }
-
-        .mobile-menu .menu-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.3rem;
-            font-weight: 600;
-            display: block;
-            padding: 10px 0;
-            transition: color 0.3s ease;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .mobile-menu .menu-links a:hover {
-            color: var(--primary);
-            padding-left: 10px;
-        }
-
-        .mobile-menu .auth-section {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu .auth-btn-mobile {
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            padding: 15px;
-            border: none;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 59, 92, 0.3);
-        }
-
-        .mobile-menu .auth-btn-mobile:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(255, 59, 92, 0.4);
-        }
-
-        .overlay {
-            position: fixed;
+        .splash-video {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            z-index: 998;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
+            object-fit: cover;
+            filter: brightness(0.3) saturate(1.3);
         }
 
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
+        .splash-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea80 0%, #764ba280 100%);
+            mix-blend-mode: multiply;
         }
 
-        /* ===== HERO ===== */
-        .hero {
-            background: linear-gradient(145deg, #0a0a0f, #1a1a25);
-            color: white;
-            padding: 6rem 0;
+        .splash-content {
+            position: relative;
+            z-index: 10;
             text-align: center;
+            color: white;
+            padding: 2rem;
+            animation: floatIn 1s ease-out;
+            max-width: 800px;
+        }
+
+        @keyframes floatIn {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .splash-logo {
+            width: 140px;
+            height: 140px;
+            border-radius: 40px;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            animation: pulse 2s infinite;
+            object-fit: cover;
+            border: 4px solid rgba(255,255,255,0.3);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            }
+        }
+
+        .splash-title {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+            animation: slideUp 0.8s 0.2s both;
+        }
+
+        .splash-sub {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 3rem;
+            font-weight: 500;
+            background: rgba(255,255,255,0.15);
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 60px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: slideUp 0.8s 0.4s both;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* ===== LOADING MÉCANIQUE ===== */
+        .loading-container {
+            margin: 3rem auto 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .gear {
+            font-size: 5rem;
+            display: inline-block;
+            animation: spin 3s linear infinite;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.5));
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .loading-dots span {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            display: inline-block;
+            animation: dots 1.5s infinite;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        .loading-dots span:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+        .loading-dots span:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes dots {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% { 
+                transform: scale(1.5);
+                opacity: 1;
+                background: #667eea;
+            }
+        }
+
+        .progress-bar {
+            width: 300px;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 6px;
+            animation: progress 8s ease-in-out forwards;
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            20% { width: 20%; }
+            40% { width: 40%; }
+            60% { width: 60%; }
+            80% { width: 80%; }
+            100% { width: 100%; }
+        }
+
+        .splash-btn {
+            background: white;
+            color: #0f172a;
+            border: none;
+            padding: 1.2rem 4rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             position: relative;
             overflow: hidden;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: btnAppear 0.5s 8s forwards;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            animation: slideUp 0.8s ease;
+        @keyframes btnAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.9;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+        .splash-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-color: #667eea;
         }
 
-        .hero-btn {
-            background: var(--primary);
-            color: white;
-            padding: 1rem 3rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(255, 59, 92, 0.4);
-        }
-
-        .hero-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 35px rgba(255, 59, 92, 0.6);
-        }
-
-        /* ===== FEATURES ===== */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 2.5rem 2rem;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.02);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-
-        .feature-card p {
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        /* ===== PRODUITS ===== */
-        .products-section {
-            background: white;
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: var(--dark);
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 1px solid #f0f0f0;
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--primary);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 220px;
-            background: linear-gradient(145deg, #2a2a35, #1a1a25);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
-        }
-
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        .product-name {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .product-price {
-            color: var(--primary);
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .product-btn {
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.8rem;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 59, 92, 0.2);
-        }
-
-        .product-btn:hover {
-            background: #ff4d6d;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(255, 59, 92, 0.3);
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 4rem 0 2rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-section h4 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .footer-section p,
-        .footer-section a {
-            color: #b0b0c0;
-            text-decoration: none;
-            font-size: 0.95rem;
-            line-height: 2;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: var(--primary);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 2rem;
-            text-align: center;
-            color: #8a8aa0;
-        }
-
-        /* ===== ANIMATIONS ===== */
         @keyframes slideUp {
             from {
                 opacity: 0;
@@ -486,244 +263,377 @@
             }
         }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .burger-menu {
-                display: flex;
-            }
+        /* ===== MAIN CONTENT (inchangé) ===== */
+        .main-content {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-            .nav-links {
-                display: none;
-            }
+        .main-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-            .hero h1 {
-                font-size: 2.2rem;
-            }
+        /* ===== HEADER ===== */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid #667eea;
+        }
 
-            .section-title {
-                font-size: 2rem;
-            }
+        .logo {
+            height: 50px;
+            width: auto;
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
 
-            .products-grid {
-                grid-template-columns: 1fr 1fr;
+        .logo:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        .burger {
+            font-size: 2rem;
+            cursor: pointer;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            background: #f1f5f9;
+            transition: all 0.3s;
+        }
+
+        .burger:hover {
+            background: #667eea;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        nav {
+            display: none;
+            flex-direction: column;
+            background: white;
+            position: absolute;
+            top: 90px;
+            right: 2rem;
+            width: 280px;
+            border-radius: 24px;
+            padding: 1rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+            border: 1px solid #e2e8f0;
+            z-index: 99;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        @media (max-width: 500px) {
-            .products-grid {
-                grid-template-columns: 1fr;
+        nav a {
+            color: #0f172a;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            border-radius: 16px;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin: 2px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        nav a:hover {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            transform: translateX(8px);
+            color: #667eea;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #667eea08 0%, #764ba208 100%);
+            margin: 2rem;
+            border-radius: 48px;
+            animation: fadeInUp 1s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
-            
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #475569;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cat {
+            background: white;
+            color: #0f172a;
+            padding: 2.5rem 1rem;
+            border-radius: 32px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+            animation: cardAppear 0.6s backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cat:nth-child(1) { animation-delay: 0.1s; }
+        .cat:nth-child(2) { animation-delay: 0.2s; }
+        .cat:nth-child(3) { animation-delay: 0.3s; }
+        .cat:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .cat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .cat:hover::before {
+            transform: translateY(0);
+        }
+
+        .cat:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 30px 40px -10px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+
+        .cat span {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1));
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .credit-badge {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 2px dashed #e2e8f0;
+        }
+
+        .credit-badge strong {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            font-weight: 700;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @media (max-width: 600px) {
+            .splash-title {
+                font-size: 2.5rem;
+            }
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 2.2rem;
+            }
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 1rem;
+            }
+            .cat {
+                padding: 1.5rem 0.5rem;
+                font-size: 1rem;
+            }
+            .cat span {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- OVERLAY -->
-    <div class="overlay" id="overlay"></div>
 
-    <!-- MOBILE MENU -->
-    <div class="mobile-menu" id="mobileMenu">
-        <div class="menu-header">
-            <img src="https://files.catbox.moe/tvfdek.jpg" alt="LBS SHOP">
-        </div>
-        <ul class="menu-links">
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="shop.html">Boutique</a></li>
-            <li><a href="orders.html" id="orders-link-mobile" style="display: none;">Mes Commandes</a></li>
-            <li><a href="cart.html" id="cart-link-mobile" style="display: none;">🛒 Panier</a></li>
-        </ul>
-        <div class="auth-section" id="auth-container-mobile">
-            <a href="login.html"><button class="auth-btn-mobile">Connexion</button></a>
-        </div>
-    </div>
-
-    <!-- HEADER -->
-    <header>
-        <nav class="container">
-            <a href="index.html" class="logo">
-                <img src="https://files.catbox.moe/tvfdek.jpg" alt="LBS SHOP">
-            </a>
-            
-            <!-- Menu burger interactif -->
-            <div class="burger-menu" id="burgerMenu">
-                <span></span>
-                <span></span>
-                <span></span>
+<!-- ===== SPLASH AVEC VIDÉO + ENGrenage ===== -->
+<div class="splash" id="splash">
+    <video class="splash-video" autoplay muted loop playsinline>
+        <source src="https://files.catbox.moe/zhdhh3.mp4" type="video/mp4">
+    </video>
+    <div class="splash-overlay"></div>
+    
+    <div class="splash-content">
+        <img src="https://files.catbox.moe/9m2gfm.jpg" alt="LBS SHOP" class="splash-logo">
+        <div class="splash-title">LBS SHOP</div>
+        <div class="splash-sub">Le drip & les maillots stylés du Gabon 🇬🇦</div>
+        
+        <div class="loading-container">
+            <div class="gear">⚙️</div>
+            <div class="loading-text">CHARGEMENT DE LA BOUTIQUE</div>
+            <div class="loading-dots">
+                <span></span><span></span><span></span><span></span><span></span>
             </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
 
-            <!-- Navigation desktop -->
-            <ul class="nav-links">
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="shop.html">Boutique</a></li>
-                <li><a href="orders.html" id="orders-link" style="display: none;">Mes Commandes</a></li>
-                <li><a href="cart.html" id="cart-link" style="display: none;">🛒 Panier</a></li>
-                <li id="auth-container">
-                    <a href="login.html"><button class="auth-btn">Connexion</button></a>
-                </li>
-            </ul>
-        </nav>
+        <button class="splash-btn" onclick="enterSite()">
+            ENTRER DANS LA BOUTIQUE
+        </button>
+    </div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main-content" id="mainContent">
+    <header>
+        <img src="https://files.catbox.moe/9m2gfm.jpg" alt="LBS Logo" class="logo">
+        <div class="burger" onclick="toggleMenu()">☰</div>
     </header>
 
-    <!-- HERO -->
+    <nav id="menu">
+        <a href="shop.html"><span>🛍️</span> Boutique</a>
+        <a href="cart.html"><span>🛒</span> Panier</a>
+        <a href="category.html?cat=football"><span>⚽</span> Football</a>
+        <a href="category.html?cat=basket"><span>🏀</span> Basket</a>
+        <a href="category.html?cat=drip"><span>👕</span> Drip</a>
+        <a href="category.html?cat=tracksuit"><span>🎽</span> Survêtements</a>
+    </nav>
+
     <section class="hero">
-        <div class="container">
-            <h1>⚽ Maillots & Drip Premium 🔥</h1>
-            <p>Découvrez la meilleure collection de maillots foot, basket et streetwear du Gabon</p>
-            <button class="hero-btn" onclick="location.href='shop.html'">Commencer les achats</button>
+        <h1>LBS SHOP</h1>
+        <p>Le drip & les maillots stylés du Gabon 🇬🇦</p>
+    </section>
+
+    <section class="categories">
+        <div class="cat" onclick="go('football')">
+            <span>⚽</span> Football
+        </div>
+        <div class="cat" onclick="go('basket')">
+            <span>🏀</span> Basket
+        </div>
+        <div class="cat" onclick="go('drip')">
+            <span>👕</span> Drip
+        </div>
+        <div class="cat" onclick="go('tracksuit')">
+            <span>🎽</span> Survêtements
         </div>
     </section>
 
-    <!-- FEATURES -->
-    <section class="container">
-        <div class="features">
-            <div class="feature-card">
-                <div class="feature-icon">🚚</div>
-                <h3>Livraison Rapide</h3>
-                <p>Livraison sécurisée avec QR Code</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <h3>Paiement Sécurisé</h3>
-                <p>Vos données sont protégées</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">⭐</div>
-                <h3>Qualité Garantie</h3>
-                <p>Produits authentiques & premium</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📞</div>
-                <h3>Support 24/7</h3>
-                <p>Nous sommes toujours là pour vous</p>
-            </div>
-        </div>
-    </section>
+    <div class="credit-badge">
+        <strong>LBS SHOP SITE BY CRAZY TECH</strong>
+    </div>
+</div>
 
-    <!-- PRODUITS -->
-    <section class="products-section">
-        <div class="container">
-            <h2 class="section-title">Produits Vedettes</h2>
-            <div class="products-grid" id="featured-products"></div>
-        </div>
-    </section>
+<script>
+    function enterSite() {
+        const splash = document.getElementById('splash');
+        const mainContent = document.getElementById('mainContent');
+        
+        splash.classList.add('hide');
+        mainContent.classList.add('visible');
+        sessionStorage.setItem('splashSeen', 'true');
+    }
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>LBS SHOP</h4>
-                    <p>Maillots & Drip Premium du Gabon 🇬🇦</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Liens Rapides</h4>
-                    <p><a href="#">À propos</a></p>
-                    <p><a href="#">Conditions</a></p>
-                    <p><a href="#">Contact</a></p>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>📧 info@lbsshop.ga</p>
-                    <p>📞 +241 XX XXX XXXX</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 LBS SHOP. Tous droits réservés. 🔥</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        const API_URL = 'http://localhost:5000/api';
-
-        // Gestion du menu burger interactif
-        const burgerMenu = document.getElementById('burgerMenu');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const overlay = document.getElementById('overlay');
-
-        function toggleMenu() {
-            burgerMenu.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            overlay.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+    window.addEventListener('load', function() {
+        if (sessionStorage.getItem('splashSeen')) {
+            document.getElementById('splash').style.display = 'none';
+            document.getElementById('mainContent').classList.add('visible');
+        } else {
+            // Auto-entrée après 9 secondes (la durée de l'animation)
+            setTimeout(() => {
+                if (!sessionStorage.getItem('splashSeen')) {
+                    enterSite();
+                }
+            }, 9000);
         }
+    });
 
-        burgerMenu.addEventListener('click', toggleMenu);
-        overlay.addEventListener('click', toggleMenu);
+    function toggleMenu() {
+        const menu = document.getElementById('menu');
+        menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+    }
 
-        // Fermer le menu si on clique sur un lien
-        document.querySelectorAll('.mobile-menu .menu-links a').forEach(link => {
-            link.addEventListener('click', toggleMenu);
+    function go(cat) {
+        const cards = document.querySelectorAll('.cat');
+        cards.forEach(card => {
+            card.style.transform = 'scale(0.9)';
+            card.style.opacity = '0.5';
+            card.style.transition = 'all 0.3s';
         });
+        
+        setTimeout(() => {
+            location.href = `category.html?cat=${cat}`;
+        }, 300);
+    }
 
-        // Charger les produits
-        async function loadFeaturedProducts() {
-            try {
-                const response = await fetch(`${API_URL}/products`);
-                const products = await response.json();
-                const container = document.getElementById('featured-products');
-                container.innerHTML = products.slice(0, 4).map(p => `
-                    <div class="product-card">
-                        <div class="product-image">⚽</div>
-                        <div class="product-info">
-                            <div class="product-name">${p.name}</div>
-                            <div class="product-price">${p.price.toLocaleString()} FCFA</div>
-                            <button class="product-btn" onclick="addToCart('${p.id}')">Ajouter</button>
-                        </div>
-                    </div>
-                `).join('');
-            } catch (error) {
-                console.error('Erreur:', error);
-            }
-        }
+    window.enterSite = enterSite;
+    window.toggleMenu = toggleMenu;
+    window.go = go;
+</script>
 
-        function addToCart(productId) {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                alert('Connectez-vous d\'abord');
-                window.location.href = 'login.html';
-                return;
-            }
-            alert('Produit ajouté au panier!');
-        }
-
-        function checkAuth() {
-            const token = localStorage.getItem('token');
-            
-            // Desktop
-            const authContainer = document.getElementById('auth-container');
-            const ordersLink = document.getElementById('orders-link');
-            const cartLink = document.getElementById('cart-link');
-            
-            // Mobile
-            const ordersLinkMobile = document.getElementById('orders-link-mobile');
-            const cartLinkMobile = document.getElementById('cart-link-mobile');
-            const authContainerMobile = document.getElementById('auth-container-mobile');
-            
-            if (token) {
-                // Desktop
-                authContainer.innerHTML = `<button class="auth-btn" onclick="logout()">Déconnexion</button>`;
-                ordersLink.style.display = 'block';
-                cartLink.style.display = 'block';
-                
-                // Mobile
-                ordersLinkMobile.style.display = 'block';
-                cartLinkMobile.style.display = 'block';
-                authContainerMobile.innerHTML = `<button class="auth-btn-mobile" onclick="logout()">Déconnexion</button>`;
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            window.location.reload();
-        }
-
-        checkAuth();
-        loadFeaturedProducts();
-    </script>
 </body>
 </html>
